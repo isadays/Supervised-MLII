@@ -33,3 +33,38 @@ data.frame(z= -5:5) %>%
   labs(x = "Logit z",
        y = "Probability") +
   theme_bw()
+#load the dataset 
+load(file = "Late.RData")
+
+late <- Atrasado
+rm(Atrasado)
+
+
+colnames(late)[1] <- "student"
+colnames(late)[2] <- "late"
+colnames(late)[3] <- "distance"
+colnames(late)[4] <- "n_trafficlights"
+
+
+late %>%
+  kable() %>%
+  kable_styling(bootstrap_options = "striped", 
+                full_width = F, 
+                font_size = 14)
+
+summary(late)
+
+table(late)
+
+
+#Logistic model 
+
+model_late <- glm(formula= late ~ distance + n_trafficlights,
+                  data = late,
+                  family = "binomial")
+
+summary(late)
+
+
+
+
